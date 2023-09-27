@@ -16,7 +16,6 @@ public class ConexionBD {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-
     return con;
   }
 
@@ -24,6 +23,7 @@ public class ConexionBD {
     if (con != null) {
       try {
         con.close();
+        con = null;
       } catch (SQLException e) {
         System.out.println(e.getMessage());
         e.printStackTrace();
