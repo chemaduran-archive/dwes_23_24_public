@@ -1,0 +1,6 @@
+2023-10-04 09:51:55 INFO  Main:11 - Antes de la invocación. En [Main.class]
+2023-10-04 09:51:55 INFO  Misc:9 - Entrando en addition [Misc.class]
+2023-10-04 09:51:55 ERROR Misc:11 - Terminando addition [Misc.class]
+2023-10-04 09:51:55 INFO  Misc:16 - Entrando en substraction [Misc.class]
+2023-10-04 09:51:55 INFO  Misc:18 - Saliendo de substraction [Misc.class]
+2023-10-04 09:51:55 INFO  Main:16 - Después de la invocación. En [Main.class]
