@@ -18,7 +18,7 @@ public class ServletPrincipal extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("Realizando Get");
-        request.getRequestDispatcher("botonEntrar.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/botonEntrar.jsp").forward(request, response);
     }
 
     @Override
@@ -28,6 +28,7 @@ public class ServletPrincipal extends HttpServlet {
         if(req.getParameter("boton_entrar").equals("Entrar")){
             HttpSession session = req.getSession();
             session.setAttribute("LOGUEADO", true);
+            log.info("Log en la aplicación");
         } else {
             log.error("Se ha recibido un parámetro erróneo");
         }

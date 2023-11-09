@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet("/MatricularServlet")
 public class ServletMatricular extends HttpServlet {
 
-    static final Logger log = LoggerFactory.getLogger(SeleccionServlet.class);
+    static final Logger log = LoggerFactory.getLogger(ServletMatricular.class);
 
     public void init(){}
 
@@ -22,8 +22,12 @@ public class ServletMatricular extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info("Realizando Get");
         HttpSession session = req.getSession();
-        if (!session.isNew() && (boolean) session.getAttribute("LOGUEADO")) {
+        if (!session.isNew() &&
+                session.getAttribute("LOGUEADO")!=null &&
+                (boolean) session.getAttribute("LOGUEADO"))
+        {
             log.info(session.getAttribute("matriculaBean").toString());
+            req.getRequestDispatcher("matricular.jsp").forward(req, resp);
         } else {
             log.error("No se ha recibido la sesión adecuada");
             session.invalidate();

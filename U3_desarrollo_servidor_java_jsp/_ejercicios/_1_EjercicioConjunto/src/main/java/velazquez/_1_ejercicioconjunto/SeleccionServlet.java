@@ -15,11 +15,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @WebServlet("/SeleccionServlet")
 public class SeleccionServlet extends HttpServlet {
 
   static final Logger log = LoggerFactory.getLogger(SeleccionServlet.class);
+  private static final String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+  private static final Pattern PASSWORD_PATTERN = Pattern.compile(regexPattern);
 
   public void init() {}
 
@@ -27,8 +30,11 @@ public class SeleccionServlet extends HttpServlet {
       throws ServletException, IOException {
     log.info("Realizando Get");
     HttpSession session = request.getSession();
-    if (!session.isNew() && (boolean) session.getAttribute("LOGUEADO")) {
-      request.getRequestDispatcher("formulario.jsp").forward(request, response);
+    if (!session.isNew() &&
+        session.getAttribute("LOGUEADO")!=null &&
+        (boolean) session.getAttribute("LOGUEADO"))
+    {
+      request.getRequestDispatcher("/WEB-INF/view/formulario.jsp").forward(request, response);
     } else {
       log.error("No se ha recibido la sesión adecuada");
       session.invalidate();
@@ -49,6 +55,26 @@ public class SeleccionServlet extends HttpServlet {
       }
       String[] seleccion = req.getParameterValues("asignaturas");
       log.info("El valor de Asignatura es: " + Arrays.toString(seleccion));
+
+      String nombre = req.getParameter("Nombre");
+
+      if (nombre!=null || nombre.length()<8 ){
+        String mensajeError = "El nombre debe contener al menos 8 caracteres";
+        log.error(mensajeError);
+        session.setAttribute("error", mensajeError);
+        resp.sendRedirect(req.getContextPath() + "/SeleccionServlet");
+        return;
+      }
+
+      String email = req.getParameter("Email");
+
+      if (!PASSWORD_PATTERN.matcher(email).matches()) {
+        String mensajeError = "Email no válido";
+        log.error(mensajeError);
+        session.setAttribute("error", mensajeError);
+        resp.sendRedirect(req.getContextPath() + "/SeleccionServlet");
+        return;
+      }
 
       MatriculaBean matricula = new MatriculaBean();
       matricula.setNombre(req.getParameter("Nombre"));
