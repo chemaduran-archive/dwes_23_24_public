@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <servlet>
+        <servlet-name>Main</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.MainServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AddPayment</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.AddPaymentServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.RegisterServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdatePayment</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.UpdatePaymentServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AdminMain</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.AdminMainServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.LogOutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.SearchProductServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Orders</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.ShowOrders</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>OrderDetails</servlet-name>
+        <servlet-class>velazquez._5_registrologin.controller.OrderDetails</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Main</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddPayment</servlet-name>
+        <url-pattern>/Admin/Add</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UpdatePayment</servlet-name>
+        <url-pattern>/Admin/Update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Orders</servlet-name>
+        <url-pattern>/Admin/Orders</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>OrderDetails</servlet-name>
+        <url-pattern>/Admin/OrderDetails</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AdminMain</servlet-name>
+        <url-pattern>/Admin/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>velazquez._5_registrologin.filters.FiltroAdmin</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>velazquez._5_registrologin.filters.FiltroUsuario</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>UpdatePayment</servlet-name>
+        <servlet-name>AddPayment</servlet-name>
+        <servlet-name>AdminMain</servlet-name>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/Search</url-pattern>
+    </filter-mapping>
+
+</web-app>

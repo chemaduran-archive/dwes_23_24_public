@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <servlet>
+        <servlet-name>ListadoCategorias</servlet-name>
+        <servlet-class>velazquez._4_productlinescrud.controller.ProductLinesServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>RemoveCategoria</servlet-name>
+        <servlet-class>velazquez._4_productlinescrud.controller.RemoveProductLineServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateCategoria</servlet-name>
+        <servlet-class>velazquez._4_productlinescrud.controller.UpdateProductLineServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>CreateCategoria</servlet-name>
+        <servlet-class>velazquez._4_productlinescrud.controller.CreateProductLineServlet
+        </servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ListadoCategorias</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>RemoveCategoria</servlet-name>
+        <url-pattern>/RemoveCategoria</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UpdateCategoria</servlet-name>
+        <url-pattern>/UpdateCategoria</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>CreateCategoria</servlet-name>
+        <url-pattern>/CreateCategoria</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/img/*</url-pattern>
+        <url-pattern>/css/*</url-pattern>
+        <url-pattern>/js/*</url-pattern>
+    </servlet-mapping>
+    
+</web-app>

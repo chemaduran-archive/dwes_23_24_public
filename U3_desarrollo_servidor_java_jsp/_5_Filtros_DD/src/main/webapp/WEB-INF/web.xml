@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+    <servlet>
+        <servlet-name>Inicio</servlet-name>
+        <servlet-class>velazquez._1_filtros_dd.controller.InicioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Inicio</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>velazquez._1_filtros_dd.controller.AdminServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Usuario</servlet-name>
+        <servlet-class>velazquez._1_filtros_dd.controller.UsuarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Usuario</servlet-name>
+        <url-pattern>/Usuario</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LogOut</servlet-name>
+        <servlet-class>velazquez._1_filtros_dd.controller.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogOut</servlet-name>
+        <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>velazquez._1_filtros_dd.controller.AdminFilter</filter-class>
+    </filter>
+
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>velazquez._1_filtros_dd.controller.LoggedFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/Admin</url-pattern>
+    </filter-mapping>
+
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/Usuario</url-pattern>
+    </filter-mapping>
+
+</web-app>
