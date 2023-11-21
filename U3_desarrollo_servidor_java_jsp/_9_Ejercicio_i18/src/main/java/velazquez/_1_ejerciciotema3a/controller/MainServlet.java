@@ -44,6 +44,7 @@ public class MainServlet extends HttpServlet {
     logger.info("dentro del post");
     logger.info("El valor de entrar es: " + request.getParameter("entrar"));
     Locale locale = request.getLocale();
+    logger.info("El locale es: " + locale.getDisplayName());
     ResourceBundle bundle = ResourceBundle.getBundle("interface", locale);
     logger.info("El valor de la clave es: " + bundle.getString("entrar"));
 

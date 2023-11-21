@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,18 +22,19 @@
             </p>
             <p><span class="fw-bold">Email:</span><%= ((String) session.getAttribute("email")) %>
             </p>
-            <p><span class="fw-bold">Curso:</span><%= (String) request.getAttribute("curso") %>
+            <p><span class="fw-bold">Curso:</span><%= (String) session.getAttribute("curso") %>
             </p>
             <h4>Módulos</h4>
             <ul>
 
                 <%
-                    String[] modulos = (String[]) session.getAttribute("modulos");
-                    if (modulos.length == 0) {
+                    if (session.getAttribute("modulos") != null) {
+                      String[] modulos = (String[]) session.getAttribute("modulos");
+                      if (modulos.length == 0) {
                 %>
 
                 <li>No hay módulos seleccionados</li>
-                l
+
 
                 <%
                 } else {
@@ -40,6 +44,7 @@
                 </li>
                 <% } %>
                 <%
+                      }
                     }
                 %>
 

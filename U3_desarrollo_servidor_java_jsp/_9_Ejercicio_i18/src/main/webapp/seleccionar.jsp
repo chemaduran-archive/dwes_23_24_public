@@ -21,7 +21,7 @@
                 <input class="form-control mb-3" name="email" type="email" id="email" required/>
                 <label>
                     Primer curso:
-                    <input class="form-check-input" type="radio" name="curso" value="primero" checked required/>
+                        <input class="form-check-input" type="radio" name="curso" value="primero" checked required/>
                 </label>
                 <label class="form-check-label" for="curso">1º DAW</label>
                 <input class="form-check-input" type="radio" name="curso" id="curso"  value="segundo" required/>

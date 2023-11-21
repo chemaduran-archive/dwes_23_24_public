@@ -67,10 +67,12 @@ public class SeleccionServlet extends HttpServlet {
         sesion.setAttribute("nombre", request.getParameter("nombre"));
         sesion.setAttribute("apellidos", request.getParameter("apellidos"));
         sesion.setAttribute("email", request.getParameter("email"));
+        sesion.setAttribute("curso", request.getParameter("curso"));
         sesion.setAttribute("modulos", request.getParameterValues("modulos"));
+        logger.error("Redireccionando a MatricularServlet");
         // Añado la cookie que debo crear
-        Cookie cookie = new Cookie("curso", request.getParameter("curso"));
-        response.addCookie(cookie);
+//        Cookie cookie = new Cookie("curso", request.getParameter("curso"));
+//        response.addCookie(cookie);
         // Redirecciono el flujo de trabajo
         response.sendRedirect(request.getContextPath() + "/MatricularServlet");
         return;

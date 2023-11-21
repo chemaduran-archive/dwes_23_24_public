@@ -30,13 +30,13 @@ public class MatricularServlet extends HttpServlet {
         && sesion.getAttribute("LOGEADO") != null
         && ((boolean) sesion.getAttribute("LOGEADO"))) {
       // Obtengo el valor de la Cookie que me interesa (curso)
-      Cookie[] cookies = request.getCookies();
-      // Recorro las cookies hasta obtener la que estoy buscando
-      for (Cookie c : cookies) {
-        if (c.getName().equals("curso")) {
-          request.setAttribute("curso", c.getValue().equals("primero") ? "1º DAW" : "2º DAW");
-        }
-      }
+//      Cookie[] cookies = request.getCookies();
+//      // Recorro las cookies hasta obtener la que estoy buscando
+//      for (Cookie c : cookies) {
+//        if (c.getName().equals("curso")) {
+//          request.setAttribute("curso", c.getValue().equals("primero") ? "1º DAW" : "2º DAW");
+//        }
+//      }
       request.getRequestDispatcher("matricular.jsp").forward(request, response);
       return;
     }
