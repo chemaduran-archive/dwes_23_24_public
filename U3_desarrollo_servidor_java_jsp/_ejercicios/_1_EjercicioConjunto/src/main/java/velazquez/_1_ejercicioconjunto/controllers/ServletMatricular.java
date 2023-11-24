@@ -1,4 +1,4 @@
-package velazquez._1_ejercicioconjunto;
+package velazquez._1_ejercicioconjunto.controllers;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
-@WebServlet("/MatricularServlet")
+@WebServlet(name = "ServletMatricular", urlPatterns = "/MatricularServlet")
 public class ServletMatricular extends HttpServlet {
 
     static final Logger log = LoggerFactory.getLogger(ServletMatricular.class);
@@ -27,7 +27,7 @@ public class ServletMatricular extends HttpServlet {
                 (boolean) session.getAttribute("LOGUEADO"))
         {
             log.info(session.getAttribute("matriculaBean").toString());
-            req.getRequestDispatcher("matricular.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/view/matricular.jsp").forward(req, resp);
         } else {
             log.error("No se ha recibido la sesión adecuada");
             session.invalidate();

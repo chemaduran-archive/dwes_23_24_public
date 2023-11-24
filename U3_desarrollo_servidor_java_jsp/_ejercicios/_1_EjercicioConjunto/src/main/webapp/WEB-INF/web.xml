@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>ServletPrincipal</servlet-name>
-        <servlet-class>velazquez._1_ejercicioconjunto.ServletPrincipal</servlet-class>
+        <servlet-class>velazquez._1_ejercicioconjunto.controllers.ServletPrincipal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletPrincipal</servlet-name>
@@ -14,7 +14,6 @@
     </servlet-mapping>
 
     <session-config>
-        <!-- 5 min = 5 * 60s = 300s -->
-        <session-timeout>300</session-timeout>
+        <session-timeout>5</session-timeout>
     </session-config>
 </web-app>

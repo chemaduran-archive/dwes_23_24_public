@@ -1,4 +1,4 @@
-package velazquez._1_ejercicioconjunto;
+package velazquez._1_ejercicioconjunto.controllers;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

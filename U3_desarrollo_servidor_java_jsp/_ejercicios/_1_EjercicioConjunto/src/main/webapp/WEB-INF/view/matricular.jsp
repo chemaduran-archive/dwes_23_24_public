@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: jgdur
-  Date: 08/11/2023
-  Time: 8:56
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp"%>
 <html>
 <head>
@@ -13,19 +8,16 @@
 </head>
 <body>
 
-    <jsp:useBean id="matriculaBean" scope="session" class="Model.MatriculaBean" />
-    <h2>Nombre: <%= matriculaBean.getNombre() %></h2>
-    <h2>Apellidos: <%= matriculaBean.getApellidos() %></h2>
-    <h2>Email: <%= matriculaBean.getEmail() %></h2>
-    <h2>Curso: <%= matriculaBean.getCurso() %></h2>
+    <jsp:useBean id="matriculaBean" scope="session" class="velazquez._1_ejercicioconjunto.Model.MatriculaBean" />
+    <h2>Nombre: ${matriculaBean.getNombre()} </h2>
+    <h2>Apellidos: ${matriculaBean.getApellidos()} </h2>
+    <h2>Email: ${matriculaBean.getEmail()}</h2>
+    <h2>Curso: ${matriculaBean.getCurso()}</h2>
     <ul id="asignaturas">
-        <%
-            for (String asignatura : matriculaBean.getAsignaturas()){
-        %>
-                <li><%= asignatura %></li>
-        <%
-            }
-        %>
+
+    <c:forEach var="item" items="${matriculaBean.getAsignaturas()}">
+        <li>${item}</li>
+    </c:forEach>
 
     </ul>
 </body>

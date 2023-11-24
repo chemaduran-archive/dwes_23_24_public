@@ -1,4 +1,4 @@
-package velazquez._1_ejercicioconjunto;
+package velazquez._1_ejercicioconjunto.controllers;
 
 import java.io.*;
 

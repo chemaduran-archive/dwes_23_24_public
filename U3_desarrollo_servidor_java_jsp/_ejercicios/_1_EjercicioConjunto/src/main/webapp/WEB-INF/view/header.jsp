@@ -9,8 +9,8 @@
 
 <header>
     <nav>
-        <a href=<%= request.getContextPath() %> >VOLVER</a>
-        <a href=<%= request.getContextPath()  + "/ServletLogout" %> >SALIR</a>
+        <a href="${pageContext.request.contextPath}" >VOLVER</a>
+        <a href="${pageContext.request.contextPath}/ServletLogout" > >SALIR</a>
     </nav>
 </header>
 

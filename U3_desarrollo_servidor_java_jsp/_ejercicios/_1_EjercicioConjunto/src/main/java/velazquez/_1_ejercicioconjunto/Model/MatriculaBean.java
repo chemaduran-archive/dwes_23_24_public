@@ -1,4 +1,4 @@
-package Model;
+package velazquez._1_ejercicioconjunto.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
