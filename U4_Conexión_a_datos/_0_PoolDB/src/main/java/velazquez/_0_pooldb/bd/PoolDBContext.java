@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 public class PoolDBContext {
   static final Logger logger = LoggerFactory.getLogger(PoolDBContext.class);
 
-  public BasicDataSource dataSource;
+  private static BasicDataSource dataSource;
 
   public PoolDBContext() {
     initDataSource();
