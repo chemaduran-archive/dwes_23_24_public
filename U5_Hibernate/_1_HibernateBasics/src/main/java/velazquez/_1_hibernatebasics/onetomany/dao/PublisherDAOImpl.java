@@ -8,7 +8,7 @@ import velazquez._1_hibernatebasics.utils.dao.GenericDAOImpl;
 
 public class PublisherDAOImpl extends GenericDAOImpl<Publisher> implements PublisherDAO {
 
-  private Session session;
+  private final Session session;
 
   public PublisherDAOImpl(Session session) {
     super(session);

@@ -8,7 +8,7 @@ import velazquez._1_hibernatebasics.utils.dao.GenericDAOImpl;
 
 public class ProductDAOImpl extends GenericDAOImpl<Product> implements ProductDAO {
 
-  private Session session;
+  private final Session session;
 
   public ProductDAOImpl(Session session) {
     super(session);

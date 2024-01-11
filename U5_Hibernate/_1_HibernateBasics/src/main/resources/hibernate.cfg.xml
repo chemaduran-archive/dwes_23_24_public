@@ -12,7 +12,7 @@
         <property name="connection.username">root</property>
         <property name="connection.password">XXXXX</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
-        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.show_sql">true</property>
 
 
 

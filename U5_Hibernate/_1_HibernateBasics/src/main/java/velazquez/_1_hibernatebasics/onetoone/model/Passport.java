@@ -1,15 +1,16 @@
 package velazquez._1_hibernatebasics.onetoone.model;
 
 import jakarta.persistence.*;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "passports")
-public class Passport {
+public class Passport implements Identifiable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(name = "number", nullable = false, unique = true)

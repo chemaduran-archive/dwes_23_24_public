@@ -3,6 +3,7 @@ package velazquez._1_hibernatebasics.manytomany.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,9 +12,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "subjects")
-public class Subject implements Serializable {
+public class Subject implements Serializable, Identifiable {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(nullable = false, unique = true)
   private String name;
@@ -85,8 +88,6 @@ public class Subject implements Serializable {
         + name
         + ", weekHours="
         + weekHours
-        + ", teachers="
-        + teachers
         + "]";
   }
 }

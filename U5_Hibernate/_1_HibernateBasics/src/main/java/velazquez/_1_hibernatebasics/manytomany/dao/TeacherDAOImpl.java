@@ -8,7 +8,7 @@ import velazquez._1_hibernatebasics.utils.dao.GenericDAOImpl;
 
 public class TeacherDAOImpl extends GenericDAOImpl<Teacher> implements TeacherDAO {
 
-  private Session session;
+  private final Session session;
 
   public TeacherDAOImpl(Session session) {
     super(session);

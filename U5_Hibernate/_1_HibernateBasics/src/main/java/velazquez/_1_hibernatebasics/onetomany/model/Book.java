@@ -2,15 +2,18 @@ package velazquez._1_hibernatebasics.onetomany.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "books")
-public class Book implements Serializable {
+public class Book implements Serializable, Identifiable {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(nullable = false, length = 300)
   private String title;

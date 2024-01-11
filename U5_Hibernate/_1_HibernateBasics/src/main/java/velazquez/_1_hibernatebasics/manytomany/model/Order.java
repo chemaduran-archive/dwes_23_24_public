@@ -1,6 +1,7 @@
 package velazquez._1_hibernatebasics.manytomany.model;
 
 import jakarta.persistence.*;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,9 +10,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Identifiable {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "date", nullable = false)
   @Temporal(TemporalType.DATE)

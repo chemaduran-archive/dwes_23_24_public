@@ -9,7 +9,7 @@ import velazquez._1_hibernatebasics.utils.dao.GenericDAOImpl;
 
 public class SubjectDAOImpl extends GenericDAOImpl<Subject> implements SubjectDAO {
 
-  private Session session;
+  private final Session session;
 
   public SubjectDAOImpl(Session session) {
     super(session);

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -11,9 +12,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "publishers")
-public class Publisher implements Serializable {
+public class Publisher implements Serializable, Identifiable {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "name", unique = true, length = 100, nullable = false)
   private String name;

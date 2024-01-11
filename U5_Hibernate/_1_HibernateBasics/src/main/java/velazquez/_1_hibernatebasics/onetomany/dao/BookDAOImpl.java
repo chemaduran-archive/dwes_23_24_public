@@ -8,7 +8,7 @@ import velazquez._1_hibernatebasics.utils.dao.GenericDAOImpl;
 
 public class BookDAOImpl extends GenericDAOImpl<Book> implements BookDAO {
 
-  private Session session;
+  private final Session session;
 
   public BookDAOImpl(Session session) {
     super(session);

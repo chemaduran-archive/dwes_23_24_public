@@ -6,7 +6,7 @@ public interface GenericDAO<T> {
 
   public void insert(final T objetT);
 
-  public void update(final T objectT);
+  public T update(final T objectT);
 
   public void delete(final T objectT);
 

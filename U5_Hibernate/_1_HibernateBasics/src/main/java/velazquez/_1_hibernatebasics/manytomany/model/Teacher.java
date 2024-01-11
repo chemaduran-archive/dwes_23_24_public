@@ -1,6 +1,7 @@
 package velazquez._1_hibernatebasics.manytomany.model;
 
 import jakarta.persistence.*;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,9 +11,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "teachers")
-public class Teacher implements Serializable {
+public class Teacher implements Serializable, Identifiable {
 
-  @Id @GeneratedValue private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(name = "nss", nullable = false, unique = true, length = 20)
   private String NSS;

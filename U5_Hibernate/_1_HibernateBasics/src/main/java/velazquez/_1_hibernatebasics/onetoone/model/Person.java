@@ -1,16 +1,17 @@
 package velazquez._1_hibernatebasics.onetoone.model;
 
 import jakarta.persistence.*;
+import velazquez._1_hibernatebasics.utils.dao.Identifiable;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "persons")
-public class Person implements Serializable {
+public class Person implements Serializable, Identifiable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Column(name = "firstName", nullable = false)
@@ -24,17 +25,17 @@ public class Person implements Serializable {
   private Date dateOfBirth;
 
   // OPCION UNIDIRECCIONAL - Solo puede acceder desde la persona al pasaporte
-  //	@OneToOne
-  //	@JoinColumn(name="passport_id")
-  //	private Passport passport;
+  	@OneToOne
+  	@JoinColumn(name="passport_id")
+  	private Passport passport;
 
   // OPCION BIDIRECCIONAL
-  @OneToOne(
-      mappedBy = "person",
-      cascade = CascadeType.ALL,
-      orphanRemoval = true,
-      fetch = FetchType.LAZY)
-  private Passport passport;
+//  @OneToOne(
+//      mappedBy = "person",
+//      cascade = CascadeType.ALL,
+//      orphanRemoval = true,
+//      fetch = FetchType.LAZY)
+//  private Passport passport;
 
   public Person() {
   }

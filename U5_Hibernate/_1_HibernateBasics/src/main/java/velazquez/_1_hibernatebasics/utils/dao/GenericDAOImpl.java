@@ -2,16 +2,18 @@ package velazquez._1_hibernatebasics.utils.dao;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Objects;
 
+import jakarta.persistence.EntityExistsException;
 import org.hibernate.Session;
 
-public class GenericDAOImpl<T> implements GenericDAO<T> {
+public class GenericDAOImpl<T extends Identifiable> implements GenericDAO<T> {
 
   // Tipo de la clase Genérica
   private Class<T> entityClass;
 
   // Sesión para obtener la conexión a la base de datos.
-  private Session session;
+  private final Session session;
 
   public GenericDAOImpl(Session session) {
     setEntityClass(
@@ -30,7 +32,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     // Inserta el objeto
-    session.save(objectT);
+    session.persist(objectT);
     session.flush();
 
     // Confirma la inserción
@@ -38,7 +40,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
   }
 
   @Override
-  public void update(final T objectT) {
+  public T update(final T objectT) {
+    T objectUpdated = null;
 
     // Comprueba si la conexión está activa
     if (!session.getTransaction().isActive()) {
@@ -46,10 +49,27 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     // Actualiza el objeto
-    session.saveOrUpdate(objectT);
+    //    session.saveOrUpdate(objectT);
 
-    // Confirma la actualización
-    session.getTransaction().commit();
+    if (Objects.isNull(session.find(this.entityClass, objectT.getId()))) {
+      session.persist(objectT);
+      System.out.println("UPDATE Insertado: " + objectT);
+    } else {
+      objectUpdated = session.merge(objectT);
+      System.out.println("UPDATE Actualizado: " + objectUpdated);
+    }
+
+    try {
+      // Confirma la actualización
+      session.getTransaction().commit();
+    } catch (EntityExistsException e) {
+      System.out.println("Error al actualizar: " + objectT);
+      System.out.println(e.getMessage());
+      for (StackTraceElement element : e.getStackTrace()) {
+        System.out.println(element);
+      }
+    }
+    return objectUpdated;
   }
 
   @Override
@@ -61,7 +81,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     // Elimina el objeto
-    session.delete(objectT);
+    session.remove(objectT);
 
     // Confirmo al inserción
     session.getTransaction().commit();
