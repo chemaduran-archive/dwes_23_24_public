@@ -1,6 +1,6 @@
 <hibernate-configuration>
     <session-factory>
-        <!-- CONFIGURACIÓN (MySQL) -->
+        <!-- CONFIGURACIÓN (MariaDB) -->
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
         <property name="connection.url">jdbc:mariadb://localhost:3336/pokemon?createDatabaseIfNotExist=true</property>
         <property name="connection.username">root</property>
@@ -9,9 +9,13 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
 
-        <mapping class="models.Categoria"/>
-        <mapping class="models.EstadisticasPokemon"/>
         <mapping class="models.Pokemon"/>
+        <mapping class="models.EstadisticasPokemon"/>
+        <mapping class="models.Categoria"/>
+        <mapping class="models.Tipo"/>
+        <mapping class="models.Habilidad"/>
+        <mapping class="models.Debilidad"/>
+
 
 
     </session-factory>

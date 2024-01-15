@@ -1,10 +1,12 @@
 package models;
 
+import dao.generic.Identifiable;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
+
+
 @Entity
-public class Categoria implements Serializable {
+public class Categoria implements Serializable, Identifiable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name="id")

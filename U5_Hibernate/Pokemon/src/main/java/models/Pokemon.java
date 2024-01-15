@@ -1,12 +1,15 @@
 package models;
 
+import dao.generic.Identifiable;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-public class Pokemon implements Serializable {
+public class Pokemon implements Serializable, Identifiable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -22,7 +25,9 @@ public class Pokemon implements Serializable {
     @Column
     private String imagen;
 
-    //    private Long idCategoria;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="HabilidadPokemon", joinColumns={@JoinColumn(name="IdPokemon")}, inverseJoinColumns={@JoinColumn(name="IdHabilidad")})
+    private Set<Habilidad> habilidades = new HashSet<>();
 
     @OneToOne(
             mappedBy = "pokemon",
@@ -46,8 +51,6 @@ public class Pokemon implements Serializable {
     public EstadisticasPokemon getEstadisticasPokemon() {
         return estadisticasPokemon;
     }
-
-
 
 
     @Override

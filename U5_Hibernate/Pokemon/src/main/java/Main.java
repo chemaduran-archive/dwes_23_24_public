@@ -29,7 +29,7 @@ public class Main {
         estadisticasPokemon1.setPeso(120);
         estadisticasPokemon1.setPs(4);
 
-        // Establecemos la estadísticas al pokemon1
+        // Establecemos las estadísticas al pokemon1
         pokemon1.setEstadisticasPokemon(estadisticasPokemon1);
 
         session.persist(categoria);
