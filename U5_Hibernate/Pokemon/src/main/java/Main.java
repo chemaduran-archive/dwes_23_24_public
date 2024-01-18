@@ -4,15 +4,26 @@ import models.Pokemon;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import services.CategoriaService;
+import services.EstadisticasPokemonService;
+import services.PokemonService;
+import services.impl.CategoriaServiceImpl;
+import services.impl.EstadisticasPokemonServiceImpl;
+import services.impl.PokemonServiceImpl;
+
 public class Main {
     static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) {
         logger.info("prueba de loggin");
         Session session = HibernateUtils.getSessionFactory().openSession();
-        session.beginTransaction();
+
+        CategoriaService categoriaService = new CategoriaServiceImpl(session);
+        PokemonService pokemonService = new PokemonServiceImpl(session);
 
         Categoria categoria = new Categoria();
         categoria.setNombre("salmorejo");
+
+        categoriaService.insertNewCategoria(categoria);
 
         Pokemon pokemon1 = new Pokemon();
         pokemon1.setNombre("ElectricBeer");
@@ -29,13 +40,12 @@ public class Main {
         estadisticasPokemon1.setPeso(120);
         estadisticasPokemon1.setPs(4);
 
+
         // Establecemos las estadísticas al pokemon1
         pokemon1.setEstadisticasPokemon(estadisticasPokemon1);
 
-        session.persist(categoria);
-        session.persist(pokemon1);
+        pokemonService.insertNewPokemon(pokemon1);
 
-        session.getTransaction().commit();
         session.close();
 
     }

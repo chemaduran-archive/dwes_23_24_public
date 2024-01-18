@@ -1,11 +1,12 @@
 package models;
 
+import dao.generic.Identifiable;
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-public class Debilidad {
+public class Debilidad implements Identifiable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   @Column(name = "idDebilidad")

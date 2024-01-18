@@ -1,16 +1,22 @@
 package models;
 
+import dao.generic.Identifiable;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class EstadisticasPokemon implements Serializable {
+public class EstadisticasPokemon implements Serializable, Identifiable {
   @Id
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "idPokemon")
   private Pokemon pokemon;
+
+  @Override
+  public Long getId() {
+    return pokemon.getId();
+  }
 
   @Column(name = "peso")
   private double peso;
@@ -141,4 +147,6 @@ public class EstadisticasPokemon implements Serializable {
     return Objects.hash(
         pokemon.getId(), peso, altura, ps, ataque, defensa, at_especial, df_especial, velocidad);
   }
+
+
 }

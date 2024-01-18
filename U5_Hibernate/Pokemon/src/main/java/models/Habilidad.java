@@ -1,5 +1,6 @@
 package models;
 
+import dao.generic.Identifiable;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -7,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-public class Habilidad {
+public class Habilidad implements Identifiable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   @Column(name = "idHabilidad")
@@ -16,8 +17,8 @@ public class Habilidad {
   @Column(name = "nombre")
   private String nombre;
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  private Set<Pokemon> pokemons = new HashSet<>();
+  @ManyToOne
+  private Pokemon pokemon;
 
   public Long getId() {
     return id;

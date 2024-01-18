@@ -53,6 +53,11 @@ public class Pokemon implements Serializable, Identifiable {
     }
 
 
+//    public void addHabilidad(Habilidad habilidad) {
+//        this.habilidades.add(habilidad);
+//        habilidad.setPokemon(this);
+//    }
+
     @Override
     public String toString() {
         return "Pokemon{" +

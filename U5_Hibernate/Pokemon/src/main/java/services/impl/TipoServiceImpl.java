@@ -40,9 +40,9 @@ public class TipoServiceImpl implements TipoService {
   }
 
   @Override
-  public Tipo searchById(Long postId) {
-    if (postId != null) {
-      return tipoDAO.searchById(postId);
+  public Tipo searchById(Long id) {
+    if (id != null) {
+      return tipoDAO.searchById(id);
     }
     return null;
   }
