@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- CONFIGURACIÓN (MARIABD) -->
+        <property name="connection.url">jdbc:mariadb://localhost:3336/empresas?createDatabaseIfNotExist=true</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">XXXXX</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MariaDBDialect</property>
+        <property name="hibernate.show_sql">false</property>
+
+        <!--  ENTIDADES A MAPEAR -->
+        <mapping class="model.Empresa"/>
+        <mapping class="model.Departamento"/>
+        <mapping class="model.Sede"/>
+        <mapping class="model.Empleado"/>
+        <mapping class="model.DptoEmpl"/>
+
+
+    </session-factory>
+</hibernate-configuration>
