@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="/fragments/bootstrap::head(title='Simple Form')"></head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-6">
+            <h1>Formulario simple</h1>
+            <div th:if="${product.productName == null}">
+                <form th:action="@{/forms/simpleform}" th:object="${product}" method="post">
+                    <label for="productCode">Code</label>
+                    <input type="text" class="form-control" id="productCode" placeholder="Código del producto"
+                           th:field="*{productCode}" required>
+                    <label class="mt-3" for="productName">Name</label>
+                    <input type="text" class="form-control" id="productCode" placeholder="Nombre del producto"
+                           th:field="*{productName}" required>
+                    <label class="mt-3" for="productDescription">Description</label>
+                    <textarea rows="10" class="form-control" id="productDescription"
+                              placeholder="Descripción del producto" th:field="*{productDescription}"></textarea>
+                    <button type="submit" class="btn btn-primary mt-3 w-100">ENVIAR</button>
+                </form>
+            </div>
+            <div th:unless="${product.productName == null}">
+                <h1>Code:: <span th:text="${product.productCode}"></span></h1>
+                <h1>Name: <span th:text="${product.productName}"></span></h1>
+                <h1>Description: <span th:text="${product.productDescription}"></span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

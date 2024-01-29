@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="/fragments/bootstrap::head(title='Complex Form')"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center mt-5">
+			<div class="col-6">
+				<h1>Formulario Complejo</h1>
+				<!-- IF CONDICIONAL. EL DTO ESTÁ VACÍO LA PRIMERA VEZ QUE ENTRAMOS EN LA PÁGINA -->
+				<div th:if="${user.userName == null}">
+					<form action="#" th:action="@{/forms/complexform}" th:object="${user}" method="post">
+						 <label for="userName">Username</label>
+	    				 <input type="text" class="form-control" id="userName" placeholder="username" th:field="*{userName}" required>			
+	    				 <label class="mt-3" for="firstName">First Name</label>
+	    				 <input type="text" class="form-control" id="firstName" placeholder="first name" th:field="*{firstName}" required>
+	    				 <label class="mt-3" for="lastName">Last Name</label>
+	    				 <input type="text" class="form-control" id="lastName" placeholder="last name" th:field="*{lastName}" required>
+	    				 <label class="mt-3" for="birthDate">Birth Date</label>
+	    				 <input type="date" class="form-control" id="birthDate" placeholder="birth date" th:field="*{birth}" required>	    				 
+	    				 <h6 class="mt-3">Sex</h6>	    				 
+	    				 <p><input type="radio" name="sex" th:field="*{sex}" class="form-check-input" value="Male" id="Male" >
+	    				 <label class="form-check-label" for="Male"> Male</label></p>
+	    				 <p><input type="radio" name="sex" th:field="*{sex}" class="form-check-input" value="Female" id="Female" >
+	    				 <label class="form-check-label" for="FeMale"> Female</label></p>
+	    				 <p><input type="radio" name="sex" th:field="*{sex}" class="form-check-input" value="Other" id="Other" >
+	    				 <label class="form-check-label" for="Other">Other</label></p>
+	    				 <h6>Hobbies</h6>
+	    				 <p><input class="form-check-input" type="checkbox" value="travel" id="travel" th:field="*{hobbies}">
+  						 <label class="form-check-label" for="travel">Travel</label></p>
+	    				 <p><input class="form-check-input" type="checkbox" value="music" id="music" th:field="*{hobbies}">
+  						 <label class="form-check-label" for="music">Music</label></p>	
+  						 <p><input class="form-check-input" type="checkbox" value="cinema" id="cinema" th:field="*{hobbies}">
+  						 <label class="form-check-label" for="travel">Cinema</label></p>
+  						 <p><input class="form-check-input" type="checkbox" value="other" id="other" th:field="*{hobbies}">
+  						 <label class="form-check-label" for="travel">Other</label></p>
+  						 <label class="mt-3" for="country" th:text="#{fields.country}"></label>
+  						 <select id="country" class="form-select" th:field="*{country}">
+  						 	<option th:each=" entry,stats : ${paises}" th:value="${entry.key}" th:text="#{${entry.value}}">
+  						 </select>  						 
+	    				 <button type="submit" class="btn btn-primary mt-3 w-100">ENVIAR</button>
+					</form>
+				</div>
+				<!--  PARTE EQUIVALENTE AL ELSE. EL DTO no estará vacío. -->	
+				<div th:unless="${user.userName == null}">					
+					
+					<!-- EXPRESIONES MÁS COMPLEJAS USANDO th:text -->
+					<h3 th:text="| User name: ${user.userName}|" ></h3>
+					<h3 th:text="| First name: ${user.firstName}|"></h3>
+					<h3 th:text="| Last name: ${user.lastName}|"></h3>
+					<h3 th:text="| Birth date : ${user.birth}| "></h3>
+					<h3 th:text="| Sex: ${user.sex}|"></h3>
+					<h3 th:text="| Country: ${user.country}|"></h3>
+					
+					<!--  ITERACIÓN SOBRE LOS VALORES DE HOBBIES EN EL DTO -->
+					<ul>
+						<li th:each="hobby : ${user.hobbies}" th:text="${hobby}"></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+	</div>	
+</body>
+</html>
