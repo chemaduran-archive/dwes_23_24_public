@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Products')}"></head>
+<body>
+	<div class="container mt-5">
+		<div class="row mt-5">
+			<header th:insert="~{fragments/parts::menu}"></header>
+			<h1>
+				<span th:text="#{content.hello}"></span><span th:text="#{${contenido}}"></span>
+			</h1>
+			<h1 th:text="|Soy un usuario de tipo: ${session.role}"></h1>
+			<footer th:replace="~{fragments/parts::footer(info='menu.products')}"></footer>
+		</div>
+	</div>
+</body>
+</html>

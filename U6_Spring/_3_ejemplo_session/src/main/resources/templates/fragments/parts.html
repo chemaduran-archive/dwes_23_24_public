@@ -1,0 +1,25 @@
+<nav th:fragment="menu" class="navbar navbar-expand-lg navbar-light bg-primary ">
+	<div class="container-fluid">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item "><a class="nav-link text-white" aria-current="page"
+					href="/" th:text="#{menu.home}"></a></li>
+				<li class="nav-item"><a class="nav-link text-white" th:href="@{/products}" th:text="#{menu.products}"></a>
+				</li>
+				<li class="nav-item"><a class="nav-link text-white " th:href="@{/services}" th:text="#{menu.services}"></a>
+				</li>
+				<li class="nav-item"><a class="nav-link text-white" th:href="@{/about}" th:text="#{menu.about}"></a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<footer th:fragment="footer(info)" class="bg-primary">
+	<h1 class="text-center text-center" th:text="#{${info}}"></h1>
+</footer>
+
