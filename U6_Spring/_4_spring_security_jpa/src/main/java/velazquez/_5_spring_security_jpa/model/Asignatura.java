@@ -1,7 +1,6 @@
 package velazquez._5_spring_security_jpa.model;
 
 import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +30,14 @@ public class Asignatura {
 
   @OneToMany(mappedBy = "asignatura", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<AlumnoAsignatura> alumnosAsignatura = new HashSet<>();
+
+  @ManyToOne
+  @JoinColumn(name = "id_grado")
+  private Grado grado;
+
+  @ManyToOne
+  @JoinColumn(name = "id_profesor")
+  private Profesor profesor;
 
   public Asignatura() {}
 

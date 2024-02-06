@@ -7,5 +7,5 @@ import velazquez._5_spring_security_jpa.model.Departamento;
 @Repository
 public interface DepartamentoRepository extends JpaRepository<Departamento, Long> {
 
-  public Departamento findByNombre(String nombre);
+  Departamento findByNombre(String nombre);
 }

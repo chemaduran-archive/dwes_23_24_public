@@ -10,10 +10,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class JPAUserDetails implements UserDetails {
 
-  private String usuario;
-  private String password;
-  private boolean activo;
-  private List<GrantedAuthority> authorities;
+  private final String usuario;
+  private final String password;
+  private final boolean activo;
+  private final List<GrantedAuthority> authorities;
 
   public JPAUserDetails(Usuario usuario) {
 

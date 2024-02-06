@@ -1,6 +1,8 @@
 package velazquez._5_spring_security_jpa.dto;
 
-public class UsuarioDTO {
+import java.io.Serializable;
+
+public class UsuarioDTO implements Serializable {
 
   private String usuario;
   private String nombre;
