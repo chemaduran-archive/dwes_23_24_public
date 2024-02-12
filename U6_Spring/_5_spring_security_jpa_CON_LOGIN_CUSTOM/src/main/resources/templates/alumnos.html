@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head th:replace="~{fragments/bootstrap::head(title='Alumnos')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-8">
+            <h1 class="text-center">Lista de alumnos</h1>
+            <table class="table table-stripped table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>NIF</th>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Ciudad</th>
+                    <th>Sexo</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${alumnos}">
+                    <td th:text="${a.getId()}"></td>
+                    <td th:text="${a.getNif()}"></td>
+                    <td th:text="${a.getNombre()}"></td>
+                    <td th:text="${a.getApellido1()}"></td>
+                    <td th:text="${a.getApellido2()}"></td>
+                    <td th:text="${a.getFechaNacimiento()}"></td>
+                    <td th:text="${a.getCiudad()}"></td>
+                    <td th:text="${a.getSexo()}"></td>
+                    <td><a th:href="@{'/alumnos/asignaturas?codigo='+${a.getId()}}"><i
+                            class="bi bi-journal-bookmark-fill"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/parts::footer(info='menu.students')}"></footer>
+    </div>
+</div>
+</body>
+</html>

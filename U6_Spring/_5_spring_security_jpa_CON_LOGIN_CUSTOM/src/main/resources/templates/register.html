@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Registrase')}"></head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="#" th:action="@{/register}" th:object="${usuario}" method="post">
+                <label for="usuario" class="form-label mt-3">Usuario</label>
+                <input type="text" class="form-control" id="usuario" name="usuario" th:field="*{usuario}" required>
+                <label for="nombre" class="form-label mt-3">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" required>
+                <label for="apellidos" class="form-label mt-3">Apellidos</label>
+                <input type="text" class="form-control" id="apellidos" name="apellidos" th:field="*{apellidos}"
+                       required>
+                <label for="email" class="form-label mt-3">Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" required>
+                <label for="password" class="form-label mt-3">Password</label>
+                <input type="password" class="form-control" id="password" name="password" th:field="*{password}"
+                       required>
+                <input type="submit" class="btn btn-primary w-100 mt-3" value="REGISTRAR"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

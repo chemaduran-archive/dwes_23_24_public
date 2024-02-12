@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Asignaturas')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-8">
+            <h4 class="text-center mt-3" th:text="'Alumnos de:'+ ${asignatura.getNombre()}"></h4>
+            <table class="table table-stripped table-hover mt-5">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>NIF</th>
+                    <th>Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Ciudad</th>
+                    <th>Sexo</th>
+                    <th>Nota</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${asignatura.getAlumnosAsignatura()}">
+                    <td th:text="${a.alumno.getId()}"></td>
+                    <td th:text="${a.alumno.getNif()}"></td>
+                    <td th:text="${a.alumno.getNombre()}"></td>
+                    <td th:text="${a.alumno.getApellido1()}"></td>
+                    <td th:text="${a.alumno.getApellido2()}"></td>
+                    <td th:text="${a.alumno.getFechaNacimiento()}"></td>
+                    <td th:text="${a.alumno.getCiudad()}"></td>
+                    <td th:text="${a.alumno.getSexo()}"></td>
+                    <td th:text="${a.nota}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/parts::footer(info='menu.students')}"></footer>
+    </div>
+</div>
+</body>
+</html>
