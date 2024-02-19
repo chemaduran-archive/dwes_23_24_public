@@ -1,0 +1,414 @@
+openapi: 3.0.1
+info:
+  title: Universidad API
+  description: Ejemplo de API para Universidad.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+servers:
+  - url: http://localhost:8080/api-docs
+tags:
+  - name: failing
+    description: Endpoint which always returns an error.
+  - name: profesor
+    description: Endpoints related to pet owners.
+paths:
+  /oops:
+    get:
+      tags:
+        - failing
+      operationId: failingRequest
+      summary: Always fails
+      description: Produces sample error response.
+      responses:
+        200:
+          description: Never returned.
+          headers:
+            ETag:
+              description: An ID for this version of the response.
+              schema:
+                type: string
+          content:
+            text/plain:
+              schema:
+                type: string
+        304:
+          description: Not modified.
+          headers:
+            ETag:
+              description: An ID for this version of the response.
+              schema:
+                type: string
+        400:
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+  /api/profesores:
+    get:
+      tags:
+        - profesor
+      operationId: listProfesores
+      summary: Lista todos los profesores
+      description: Devuelve un array con todos los profesores.
+      responses:
+        200:
+          description: Profesores encontrados y devueltos.
+          headers:
+            ETag:
+              description: An ID for this version of the response.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profesor'
+  /api/profesor/{profesorId}:
+    get:
+      tags:
+        - profesor
+      operationId: getProfesor
+      summary: Obtiene un profesor mediante ID
+      description: Devuelve un profesor o un error 404.
+      parameters:
+        - name: profesorId
+          in: path
+          description: El ID del profesor.
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            example: 1
+      responses:
+        200:
+          description: Los detalles del profesor encontrado y devuelto.
+          headers:
+            ETag:
+              description: An ID for this version of the response.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profesor'
+        404:
+          description: Owner not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+    put:
+      tags:
+        - profesor
+      operationId: updateProfesor
+      summary: Actualiza los detalles de un profesor
+      description: Actualiza el registro concreto del profesor con los detalles recibidos.
+      parameters:
+        - name: profesorId
+          in: path
+          description: El ID del profesor.
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            example: 1
+      requestBody:
+        description: Los detalles del profesor utilizados para la actualización.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfesorFields'
+        required: true
+      responses:
+        200:
+          description: Actualización exitosa.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profesor'
+        400:
+          description: Petición errónea.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        404:
+          description: Profesor no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        500:
+          description: Error de servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+    delete:
+      tags:
+        - profesor
+      operationId: deleteProfesor
+      summary: Borrar un profesor mediante ID
+      description: Devuelve el profesor eliminado o un error 404.
+      parameters:
+        - name: profesorId
+          in: path
+          description: El ID del profesor.
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            example: 1
+      responses:
+        200:
+          description: Detalles del profesor eliminado y devuelto.
+          headers:
+            ETag:
+              description: Un ID para la versión de esta respuesta.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profesor'
+        400:
+          description: Petición errónea.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        404:
+          description: Profesor no encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        500:
+          description: Server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+  /api/profesor:
+    post:
+      tags:
+        - profesor
+      operationId: addProfesor
+      summary: Añade un profesor
+      description: Graba los detalles de un profesor.
+      requestBody:
+        description: El profesor a añadir.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfesorFields'
+        required: true
+      responses:
+        201:
+          description: El profesor ha sido añadido exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profesor'
+        400:
+          description: Petición errónea.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        500:
+          description: Server error.s
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+components:
+  schemas:
+    RestError:
+      title: REST Error
+      description: The schema for all error responses.
+      type: object
+      properties:
+        status:
+          title: Status
+          description: The HTTP status code.
+          type: integer
+          format: int32
+          example: 400
+          readOnly: true
+        error:
+          title: Error
+          description: The short error message.
+          type: string
+          example: Bad Request
+          readOnly: true
+        path:
+          title: Path
+          description: The path of the URL for this request.
+          type: string
+          format: uri
+          example: '/api/owners'
+          readOnly: true
+        timestamp:
+          title: Timestamp
+          description: The time the error occured.
+          type: string
+          format: date-time
+          example: '2019-08-21T21:41:46.158+0000'
+          readOnly: true
+        message:
+          title: Message
+          description: The long error message.
+          type: string
+          example: 'Request failed schema validation'
+          readOnly: true
+        schemaValidationErrors:
+          title: Schema validation errors
+          description: Validation errors against the OpenAPI schema.
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationMessage'
+        trace:
+          title: Trace
+          description: The stacktrace for this error.
+          type: string
+          example: 'com.atlassian.oai.validator.springmvc.InvalidRequestException: ...'
+          readOnly: true
+      required:
+        - status
+        - error
+        - path
+        - timestamp
+        - message
+        - schemaValidationErrors
+    ValidationMessage:
+      title: Validation message
+      description: Messages describing a validation error.
+      type: object
+      properties:
+        message:
+          title: Message
+          description: The valiation message.
+          type: string
+          example: "[Path '/lastName'] Instance type (null) does not match any allowed primitive type (allowed: [\"string\"])"
+          readOnly: true
+      required:
+        - message
+      additionalProperties: true
+    Departamento:
+      title: El departamento en el que se agrupan las materias y los profesores
+      description: Un departamento de la universidad.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: El ID del departamento.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 1
+          readOnly: true
+        nombre:
+          title: nombre
+          description: El nombre del departamento.
+          type: string
+          minLength: 1
+          maxLength: 200
+          example: 'Informática'
+    ProfesorFields:
+      title: Atributos de profesor
+      description: Atributos editables de un profesor.
+      type: object
+      properties:
+        nombre:
+          title: nombre
+          description: Nombre del profesor.
+          type: string
+          minLength: 1
+          maxLength: 30
+          pattern: '^[a-zA-Z]*$'
+          example: 'Chema'
+        nif:
+          title: NIF
+          description: El NIF del profesor.
+          type: string
+          minLength: 1
+          maxLength: 30
+          pattern: '^[a-zA-Z]*$'
+          example: '81327167H'
+        apellido1:
+          title: Primer apellido
+          description: El primer apellido del profesor.
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: 'García'
+        apellido2:
+          title: Segundo apellido
+          description: El segundo apellido del profesor.
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: 'Durán'
+        ciudad:
+          title: Ciudad
+          description: La ciudad de nacimiento del profesor.
+          type: string
+          minLength: 1
+          maxLength: 80
+          example: 'Cádiz'
+        direccion:
+          title: Dirección
+          description: La dirección postal del profesor.
+          type: string
+          minLength: 1
+          maxLength: 255
+          example: 'Calle del Cádiz en Primera, 12'
+        telefono:
+          title: Número de teléfono
+          description: El número de teléfono del profesor.
+          type: string
+          minLength: 1
+          maxLength: 20
+          pattern: '^[0-9]*$'
+          example: '608555102'
+        fechaNacimiento:
+          title: Fecha de nacimiento
+          description: La fecha de nacimiento del profesor.
+          type: string
+          format: date
+          example: '2010-09-07'
+        sexo:
+          title: Sexo
+          description: El sexo del profesor.
+          type: string
+          minLength: 1
+          maxLength: 2
+          example: 'H'
+      required:
+        - nombre
+        - nif
+    Profesor:
+      title: Profesor
+      description: Un profesor asociado a un departamento.
+      allOf:
+        - $ref: '#/components/schemas/ProfesorFields'
+        - type: object
+          properties:
+            id:
+              title: ID
+              description: El ID de un profesor.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+            departmento:
+              $ref: '#/components/schemas/Departamento'

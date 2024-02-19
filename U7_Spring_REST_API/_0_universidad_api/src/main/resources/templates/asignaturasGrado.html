@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Asignaturas del alumno')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-8">
+            <h3 class="text-center mt-3" th:text="'Grado de: '+${grado.nombre}'"></h3>
+            <table class="table table-stripped table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Asignatura</th>
+                    <th>Curso</th>
+                    <th>Cuatrimestre</th>
+                    <th>Créditos</th>
+                    <th>Tipo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="a : ${grado.asignaturasGrado}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.nombre}"></td>
+                    <td th:text="${a.curso}"></td>
+                    <td th:text="${a.cuatrimestre}"></td>
+                    <td th:text="${a.creditos}"> </td>
+                    <td th:text="${a.tipo}"> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/parts::footer(info='menu.subject')}"></footer>
+    </div>
+</div>
+</body>
+</html>
