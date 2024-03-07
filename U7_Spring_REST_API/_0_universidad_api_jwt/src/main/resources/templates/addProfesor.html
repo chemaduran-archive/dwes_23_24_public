@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Add Profesor')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-6">
+            <form th:action="@{/profesor/add}" method="post" th:object="${profesor}">
+                <label for="nombre" class="form-label mt-3">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"
+                       th:field="${profesor.nombre}" required>
+                <input type="date" th:field="${profesor.fechaNacimiento}" id="profesor-fecha-nacimiento"/>
+                <h6 class="text-danger" th:if="${error!=null}" th:text="${'Profesor existente'}"></h6>
+                <input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR"/>
+            </form>
+        </div>
+        <footer th:replace="~{fragments/parts::footer(info='menu.adddpto')}"></footer>
+    </div>
+</div>
+</body>
+</html>

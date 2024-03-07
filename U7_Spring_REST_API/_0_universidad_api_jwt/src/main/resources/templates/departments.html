@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Departments')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <h1 class="text-center mt-3" th:text="#{menu.departments}"></h1>
+        <div class="col-8">
+            <table class="table table-stripped table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="d : ${departamentos}">
+                    <td th:text="${d.getId()}"></td>
+                    <td th:text="${d.getNombre()}"></td>
+                    <td><a th:href="@{'/departments/edit?dpto='+${d.getId()}}"><i class="bi bi-pen-fill"></i></a>
+                        <a th:href="@{'/departments/profesores?dpto='+${d.getId()}}"><i class="bi bi-eye-fill"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/parts::footer(info='menu.departments')}"></footer>
+    </div>
+</div>
+</body>
+</html>

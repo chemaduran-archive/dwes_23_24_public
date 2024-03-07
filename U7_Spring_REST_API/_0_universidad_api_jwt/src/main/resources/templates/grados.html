@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<head th:replace="~{fragments/bootstrap::head(title='Grados')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-8">
+            <h1 class="text-center">Lista de grados</h1>
+            <table class="table table-stripped table-hover">
+                <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="g : ${grados}">
+                    <td th:text="${g.getId()}"></td>
+                    <td th:text="${g.getNombre()}"></td>
+                    <td><a th:href="@{'/grados/asignaturas?codigo='+${g.getId()}}"><i
+                            class="bi bi-book-half"></i></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="~{fragments/parts::footer(info='menu.grades')}"></footer>
+    </div>
+</div>
+</body>
+</html>

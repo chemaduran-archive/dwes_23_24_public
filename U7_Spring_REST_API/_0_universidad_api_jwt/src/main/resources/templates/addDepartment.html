@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{fragments/bootstrap::head(title='Add Dpto')}"></head>
+<body>
+<div class="container mt-5">
+    <div class="row mt-5 justify-content-center">
+        <header th:insert="~{fragments/parts::menu}"></header>
+        <div class="col-6">
+            <form th:action="@{/departments/add}" method="post" th:object="${dpto}">
+                <label for="nombre" class="form-label mt-3">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre"
+                       th:field="*{nombre}" required>
+                <h6 class="text-danger" th:if="${error!=null}" th:text="${'Departamento existente'}"></h6>
+                <input type="submit" class="btn btn-primary w-100 mt-3" value="AÑADIR"/>
+            </form>
+        </div>
+        <footer th:replace="~{fragments/parts::footer(info='menu.adddpto')}"></footer>
+    </div>
+</div>
+</body>
+</html>
