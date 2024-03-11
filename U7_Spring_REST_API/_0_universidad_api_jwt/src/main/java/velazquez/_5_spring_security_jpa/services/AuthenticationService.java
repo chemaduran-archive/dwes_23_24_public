@@ -47,7 +47,8 @@ public class AuthenticationService {
     usuario.setApellidos(request.getLastName());
     usuario.setEmail(request.getEmail());
     usuario.setPassword(passwordEncoder.encode(request.getPassword()));
-    usuario.setRole("USER"); // Aquí deberíamos obtener el rol de la request
+    usuario.setRole("USER");
+    usuario.setActivo(true);
     usuarioRepository.save(usuario);
     JPAUserDetails userDetails = new JPAUserDetails(usuario);
     String jwtToken = jwtService.generateToken(userDetails);
@@ -55,11 +56,16 @@ public class AuthenticationService {
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    logger.info("Authenticating user: {}", request);
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+    logger.info("User authenticated: {}", request);
     Usuario usuario = usuarioRepository.findByEmail(request.getEmail()).orElseThrow();
+    logger.info("Authenticating user: {}", usuario);
     JPAUserDetails userDetails = new JPAUserDetails(usuario);
+    logger.info("UserDetails: {}", userDetails);
     String jwtToken = jwtService.generateToken(userDetails);
+    logger.info("JWT Token: {}", jwtToken);
     return new AuthenticationResponse(jwtToken);
   }
 }

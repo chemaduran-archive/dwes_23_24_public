@@ -1,13 +1,15 @@
 package velazquez._5_spring_security_jpa.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +32,14 @@ public class Usuario implements Serializable {
 
   @Column(nullable = false)
   private String role;
-
   @Column(nullable = false, columnDefinition = "BOOLEAN")
   private boolean activo;
 
   public Usuario() {}
+
+  public void setActivo(boolean activo) {
+    this.activo = activo;
+  }
 
   public Long getId() {
     return id;
@@ -52,12 +57,42 @@ public class Usuario implements Serializable {
     this.userName = userName;
   }
 
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return null;
+  }
+
   public String getPassword() {
     return password;
   }
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  @Override
+  public String getUsername() {
+    return this.email;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return this.activo;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return this.activo;
   }
 
   public String getEmail() {
@@ -90,14 +125,6 @@ public class Usuario implements Serializable {
 
   public void setRole(String role) {
     this.role = role;
-  }
-
-  public boolean isActivo() {
-    return activo;
-  }
-
-  public void setActivo(boolean activo) {
-    this.activo = activo;
   }
 
 }

@@ -11,12 +11,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import velazquez._5_spring_security_jpa.config.JwtAuthenticationFilter;
-import velazquez._5_spring_security_jpa.services.JPAUserDetailsService;
+//import velazquez._5_spring_security_jpa.services.JPAUserDetailsService;
 
 /*
  * CLASE DONDE ESTABLECEREMOS LA CONFIGURACION DE
@@ -48,14 +49,14 @@ public class SecurityConfiguration {
   private static final String[] USER_URL = {"/about", "/services", "/alumnos/*"};
 
   // Obtengo una refencia al SINGLENTON del userDetailsService
-  private final JPAUserDetailsService userDetailsService;
+  private final UserDetailsService userDetailsService;
 
   private final AuthenticationProvider authenticationProvider;
 
   private final JwtAuthenticationFilter jwtAuthFilter;
 
   public SecurityConfiguration(
-      JPAUserDetailsService userDetailsService,
+          UserDetailsService userDetailsService,
       AuthenticationProvider authenticationProvider,
       JwtAuthenticationFilter jwtAuthFilter) {
     this.userDetailsService = userDetailsService;
@@ -94,10 +95,10 @@ public class SecurityConfiguration {
             )
         .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
         .authenticationProvider(authenticationProvider)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-//        .formLogin(form -> form.loginPage("/login").permitAll())
-//        .logout(logout -> logout.logoutUrl("/logout").permitAll())
-//        .httpBasic(withDefaults());
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .formLogin(form -> form.loginPage("/login").permitAll())
+        .logout(logout -> logout.logoutUrl("/logout").permitAll())
+        .httpBasic(withDefaults());
     http.csrf(AbstractHttpConfigurer::disable);
     return http.build();
   }
