@@ -34,8 +34,6 @@ public class SecurityConfiguration {
     "/api/v1/auth/**",
     "/v3/api-docs/**",
     "/swagger-ui/**",
-    //          "/api/**",
-    //          "/api",
     "/",
     "/img/*",
     "/logout",
@@ -79,6 +77,7 @@ public class SecurityConfiguration {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     // URL con información sobre ANT MATCHERS https://www.baeldung.com/spring-security-expressions
+    // ATENCION: Falta por implementar el acceso a los recursos por roles
     http.authorizeHttpRequests(
             authz ->
                 authz
@@ -103,9 +102,7 @@ public class SecurityConfiguration {
     return http.build();
   }
 
-  /*
-   * ESTABLECEMOS EL PASSWORD ENCODER. FUERZA 15 (de 4 a 31)
-   */
+  // ESTABLECEMOS EL PASSWORD ENCODER. FUERZA 15 (de 4 a 31)
   @Bean
   public PasswordEncoder getPasswordEncoder() {
     return new BCryptPasswordEncoder(15);

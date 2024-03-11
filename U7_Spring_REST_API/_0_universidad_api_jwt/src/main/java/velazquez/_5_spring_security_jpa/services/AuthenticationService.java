@@ -6,12 +6,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import velazquez._5_spring_security_jpa.api.ProfesorAPIController;
 import velazquez._5_spring_security_jpa.config.JwtService;
-import velazquez._5_spring_security_jpa.controller.AuthenticationRequest;
-import velazquez._5_spring_security_jpa.controller.AuthenticationResponse;
-import velazquez._5_spring_security_jpa.controller.RegisterRequest;
-import velazquez._5_spring_security_jpa.model.JPAUserDetails;
+import velazquez._5_spring_security_jpa.controller.requests.AuthenticationRequest;
+import velazquez._5_spring_security_jpa.controller.response.AuthenticationResponse;
+import velazquez._5_spring_security_jpa.controller.requests.RegisterRequest;
 import velazquez._5_spring_security_jpa.model.Usuario;
 import velazquez._5_spring_security_jpa.repository.UsuarioRepository;
 
@@ -49,9 +47,8 @@ public class AuthenticationService {
     usuario.setPassword(passwordEncoder.encode(request.getPassword()));
     usuario.setRole("USER");
     usuario.setActivo(true);
-    usuarioRepository.save(usuario);
-    JPAUserDetails userDetails = new JPAUserDetails(usuario);
-    String jwtToken = jwtService.generateToken(userDetails);
+    Usuario saved = usuarioRepository.save(usuario);
+    String jwtToken = jwtService.generateToken(saved);
     return new AuthenticationResponse(jwtToken);
   }
 
@@ -62,9 +59,7 @@ public class AuthenticationService {
     logger.info("User authenticated: {}", request);
     Usuario usuario = usuarioRepository.findByEmail(request.getEmail()).orElseThrow();
     logger.info("Authenticating user: {}", usuario);
-    JPAUserDetails userDetails = new JPAUserDetails(usuario);
-    logger.info("UserDetails: {}", userDetails);
-    String jwtToken = jwtService.generateToken(userDetails);
+    String jwtToken = jwtService.generateToken(usuario);
     logger.info("JWT Token: {}", jwtToken);
     return new AuthenticationResponse(jwtToken);
   }

@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import velazquez._5_spring_security_jpa.config.ApplicationConfig;
+import velazquez._5_spring_security_jpa.controller.requests.AuthenticationRequest;
+import velazquez._5_spring_security_jpa.controller.requests.RegisterRequest;
+import velazquez._5_spring_security_jpa.controller.response.AuthenticationResponse;
 import velazquez._5_spring_security_jpa.services.AuthenticationService;
 
 @RestController
